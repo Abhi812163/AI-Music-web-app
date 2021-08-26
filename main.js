@@ -18,13 +18,24 @@ function setup(){
 
 function draw(){
     image(video,0,0,600,500);
+
+    fill('red');
+    stroke('black');
+    if(scoreLeftWrist>0.2){
+        circle(leftWristX,leftWristY,20);
+        converted_number=Number(leftWristY);
+        remove_decimals=floor(converted_number);
+        volume=remove_decimals/500;
+        song.setVolume(volume);
+        song1.setVolume(volume);
+        song2.setVolume(volume);
+        document.getElementById("volume").innerHTML="Volume: "+volume;
 }
 
 
 function preload(){
-    song1=loadSound("music1.mp3");
-    song2=loadSound("music2.mp3");
-    
+    song1=loadSound("Harry_Potter.mp3");
+    song2=loadSound("Perfect.mp3");
 }
 
 function modelLoaded(){
@@ -47,4 +58,7 @@ if(results.length>0){
     rightWristY=results[0].pose.rightWrist.y;
     console.log("rightWristX="+rightWristX+" rightWristY="+rightWristY);
 
+    scoreLeftWrist=results[0].pose.keypoints[9].score;
+    console.log("Score of the left wrist is: "+scoreLeftWrist);
+}
 }
