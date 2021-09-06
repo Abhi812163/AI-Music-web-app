@@ -26,12 +26,22 @@ function draw(){
         converted_number=Number(leftWristY);
         remove_decimals=floor(converted_number);
         volume=remove_decimals/500;
-        song.setVolume(volume);
-        song1.setVolume(volume);
-        song2.setVolume(volume);
+        song1.play();
         document.getElementById("volume").innerHTML="Volume: "+volume;
 }
 
+fill('red');
+stroke('black');
+if(scoreRightWrist>0.2){
+    circle(rightWristX,rightWristY,20);
+    converted_number=Number(rightWristY);
+    remove_decimals=floor(converted_number);
+    volume=remove_decimals/500;
+    song2.play();
+    document.getElementById("volume").innerHTML="Volume: "+volume;
+
+
+}
 
 function preload(){
     song1=loadSound("Harry_Potter.mp3");
@@ -60,5 +70,8 @@ if(results.length>0){
 
     scoreLeftWrist=results[0].pose.keypoints[9].score;
     console.log("Score of the left wrist is: "+scoreLeftWrist);
+}
+scoreRighttWrist=results[0].pose.keypoints[10].score;
+console.log("Score of the right wrist is: "+scoreRightWrist);
 }
 }
